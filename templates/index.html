@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Face Recognition System{% endblock %}
+{% block page_title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <!-- Welcome Section -->
+    <section class="welcome-section">
+        <div class="welcome-text">
+            <h2>Welcome to <span class="gradient-text">FaceID</span></h2>
+            <p>Smart attendance system powered by AI face recognition technology</p>
+        </div>
+    </section>
+
+    <!-- Stats Grid -->
+    <section class="stats-grid">
+        <div class="stat-card" id="stat-students" style="--delay: 0.1s">
+            <div class="stat-icon blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+            </div>
+            <div class="stat-info">
+                <span class="stat-value" data-count="{{ student_count }}">{{ student_count }}</span>
+                <span class="stat-label">Students Enrolled</span>
+            </div>
+        </div>
+
+        <div class="stat-card" id="stat-images" style="--delay: 0.2s">
+            <div class="stat-icon purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                </svg>
+            </div>
+            <div class="stat-info">
+                <span class="stat-value" data-count="{{ image_count }}">{{ image_count }}</span>
+                <span class="stat-label">Face Samples</span>
+            </div>
+        </div>
+
+        <div class="stat-card" id="stat-model" style="--delay: 0.3s">
+            <div class="stat-icon {{ 'green' if model_trained else 'orange' }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    {% if model_trained %}
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                    <polyline points="22 4 12 14.01 9 11.01"/>
+                    {% else %}
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    {% endif %}
+                </svg>
+            </div>
+            <div class="stat-info">
+                <span class="stat-value">{{ "Ready" if model_trained else "Not Trained" }}</span>
+                <span class="stat-label">Model Status</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section class="quick-actions">
+        <h3 class="section-title">Quick Actions</h3>
+        <div class="actions-grid">
+            <a href="/students" class="action-card" id="action-students" style="--delay: 0.1s">
+                <div class="action-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="8.5" cy="7" r="4"/>
+                        <line x1="20" y1="8" x2="20" y2="14"/>
+                        <line x1="23" y1="11" x2="17" y2="11"/>
+                    </svg>
+                </div>
+                <h4>Manage Students</h4>
+                <p>Add, edit, or remove student records</p>
+            </a>
+
+            <a href="/train" class="action-card" id="action-train" style="--delay: 0.2s">
+                <div class="action-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                </div>
+                <h4>Train Model</h4>
+                <p>Train the recognition model with face data</p>
+            </a>
+
+            <a href="/recognize" class="action-card" id="action-recognize" style="--delay: 0.3s">
+                <div class="action-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                        <circle cx="12" cy="13" r="4"/>
+                    </svg>
+                </div>
+                <h4>Start Recognition</h4>
+                <p>Launch live face recognition camera</p>
+            </a>
+        </div>
+    </section>
+</div>
+{% endblock %}

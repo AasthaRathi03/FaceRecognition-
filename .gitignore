@@ -1,0 +1,18 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Config and Secrets
+config.py
+.env
+
+# Data and Models
+data/
+classifier.xml
+
+# IDEs
+.vscode/
+.idea/
+*.suo
+*.sln

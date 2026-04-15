@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Face Recognition — Face Recognition System{% endblock %}
+{% block page_title %}Live Recognition{% endblock %}
+
+{% block content %}
+<div class="recognize-page">
+    <div class="recognize-grid">
+        <!-- Video Feed -->
+        <section class="glass-card video-section">
+            <div class="video-header">
+                <h3 class="section-title">
+                    <span class="live-badge" id="live-badge" style="display: none;">
+                        <span class="live-dot"></span> LIVE
+                    </span>
+                    Camera Feed
+                </h3>
+            </div>
+
+            <div class="video-container" id="video-container">
+                <div class="video-placeholder" id="video-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="64" height="64">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                        <circle cx="12" cy="13" r="4"/>
+                    </svg>
+                    <p>Click "Start Recognition" to begin</p>
+                    {% if not model_trained %}
+                    <p style="color: var(--accent-orange); font-size: 0.8rem; margin-top: 8px;">
+                        ⚠ Model not trained — camera will show face detection only
+                    </p>
+                    {% endif %}
+                </div>
+                <img id="video-feed" class="video-feed" style="display: none;"
+                     alt="Live camera feed with face recognition">
+            </div>
+
+            <div class="video-controls">
+                <button class="btn btn-primary btn-lg" id="btn-start-recognition">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <polygon points="5 3 19 12 5 21 5 3"/>
+                    </svg>
+                    Start Recognition
+                </button>
+                <button class="btn btn-danger btn-lg" id="btn-stop-recognition" style="display: none;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <rect x="6" y="4" width="4" height="16"/>
+                        <rect x="14" y="4" width="4" height="16"/>
+                    </svg>
+                    Stop Recognition
+                </button>
+            </div>
+        </section>
+
+        <!-- Info Panel -->
+        <section class="glass-card info-panel">
+            <h3 class="section-title">Recognition Info</h3>
+            <div class="info-items">
+                <div class="info-item">
+                    <span class="info-label">Algorithm</span>
+                    <span class="info-value">LBPH</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Classifier</span>
+                    <span class="info-value">Haar Cascade</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Confidence Threshold</span>
+                    <span class="info-value">75%</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Model Status</span>
+                    <span class="info-value {{ 'text-green' if model_trained else 'text-red' }}">
+                        {{ "Trained ✓" if model_trained else "Not Trained ✗" }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="info-instructions">
+                <h4>Instructions</h4>
+                <ul>
+                    <li>Click <strong>Start Recognition</strong> to activate the camera</li>
+                    <li>Face the camera — recognized faces show a <span class="text-green">green</span> box</li>
+                    <li>Unknown faces show a <span class="text-red">red</span> box</li>
+                    <li>Click <strong>Stop</strong> when done</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}

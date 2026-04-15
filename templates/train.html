@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}Train Model — Face Recognition System{% endblock %}
+{% block page_title %}Train Model{% endblock %}
+
+{% block content %}
+<div class="train-page">
+    <div class="train-grid">
+        <!-- Training Info Card -->
+        <section class="glass-card train-info-card">
+            <div class="train-icon-wrapper">
+                <div class="train-icon pulse">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="48" height="48">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                </div>
+            </div>
+            <h2>Train Face Recognition Model</h2>
+            <p>Process all captured face samples and train the LBPH (Local Binary Pattern Histogram) classifier for accurate face recognition.</p>
+
+            <div class="train-stats">
+                <div class="train-stat">
+                    <span class="train-stat-value">{{ image_count }}</span>
+                    <span class="train-stat-label">Face Samples</span>
+                </div>
+                <div class="train-stat">
+                    <span class="train-stat-value">{{ "✓" if model_trained else "✗" }}</span>
+                    <span class="train-stat-label">Model Status</span>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-lg" id="btn-train" {{ "disabled" if image_count == 0 }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                    <polygon points="5 3 19 12 5 21 5 3"/>
+                </svg>
+                Start Training
+            </button>
+
+            <!-- Progress Section (hidden by default) -->
+            <div class="training-progress" id="training-progress" style="display: none;">
+                <div class="progress-bar-wrapper">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+                <p class="progress-text" id="progress-text">Training in progress...</p>
+            </div>
+
+            <!-- Result Section (hidden by default) -->
+            <div class="training-result" id="training-result" style="display: none;">
+                <div class="result-icon success">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="32" height="32">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                </div>
+                <p class="result-message" id="result-message"></p>
+                <p class="result-detail" id="result-detail"></p>
+            </div>
+
+            {% if image_count == 0 %}
+            <div class="train-warning">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <span>No face samples found. Please capture face data from the Students page first.</span>
+            </div>
+            {% endif %}
+        </section>
+
+        <!-- How it works -->
+        <section class="glass-card how-it-works">
+            <h3 class="section-title">How It Works</h3>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Capture</h4>
+                        <p>Capture 100 face samples per student using the webcam</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Train</h4>
+                        <p>LBPH algorithm learns unique facial features from the samples</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Recognize</h4>
+                        <p>The trained model identifies faces in real-time via webcam</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}
