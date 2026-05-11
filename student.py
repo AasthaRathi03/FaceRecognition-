@@ -10,7 +10,7 @@ import os
 class Student:
     def __init__(self, root):
         self.root = root
-        self.root.geometry("1530x790+0+0")
+        self.root.geometry("1366x768+0+0")
         self.root.title("Face Recognition System")
 
         # =========variables=========
@@ -32,50 +32,50 @@ class Student:
 
         # first image
         img = Image.open(r"C:\Users\Aastha Rathi\Downloads\face.jpg")
-        img = img.resize((500, 250), Image.LANCZOS)
+        img = img.resize((455, 180), Image.LANCZOS)
         self.photoimg = ImageTk.PhotoImage(img)
 
         f_lbl = Label(self.root, image=self.photoimg)
-        f_lbl.place(x=0, y=0, width=500, height=150)
+        f_lbl.place(x=0, y=0, width=455, height=180)
 
         # second image
 
         img1 = Image.open(r"C:\Users\Aastha Rathi\Downloads\main.jpg")
-        img1 = img1.resize((500, 250), Image.LANCZOS)
+        img1 = img1.resize((455, 180), Image.LANCZOS)
         self.photoimg1 = ImageTk.PhotoImage(img1)
 
         f_lbl = Label(self.root, image=self.photoimg1)
-        f_lbl.place(x=500, y=0, width=500, height=150)
+        f_lbl.place(x=455, y=0, width=455, height=180)
 
         # third image
 
         img2 = Image.open(r"C:\Users\Aastha Rathi\Downloads\next.jpg")
-        img2 = img2.resize((500, 250), Image.LANCZOS)
+        img2 = img2.resize((455, 180), Image.LANCZOS)
         self.photoimg2 = ImageTk.PhotoImage(img2)
 
         f_lbl = Label(self.root, image=self.photoimg2)
-        f_lbl.place(x=1000, y=0, width=500, height=150)
+        f_lbl.place(x=910, y=0, width=455, height=180)
 
         # bg image
 
         img3 = Image.open(r"C:\Users\Aastha Rathi\Downloads\bg.jpg")
-        img3 = img3.resize((1530, 710), Image.LANCZOS)
+        img3 = img3.resize((1366, 768), Image.LANCZOS)
         self.photoimg3 = ImageTk.PhotoImage(img3)
 
         bg_img = Label(self.root, image=self.photoimg3)
-        bg_img.place(x=0, y=150, width=1530, height=710)
+        bg_img.place(x=0, y=150, width=1366, height=618)
 
         title_lbl = Label(
             bg_img,
             text="STUDENT MANAGEMENT SYSTEM SOFTWARE",
-            font=("times new roman", 30, "bold"),
+            font=("times new roman", 24, "bold"),
             bg="white",
             fg="dark green",
         )
-        title_lbl.place(x=0, y=0, width=1530, height=40)
+        title_lbl.place(x=0, y=0, width=1355, height=40)
 
         main_frame = Frame(bg_img, bd=2, bg="white")
-        main_frame.place(x=0, y=35, width=1600, height=600)
+        main_frame.place(x=5, y=35, width=1355, height=560)
 
         # left label frame
 
@@ -87,14 +87,14 @@ class Student:
             text="Student Details",
             font=("times new roman", 12, "bold"),
         )
-        Left_frame.place(x=10, y=1, width=750, height=590)
+        Left_frame.place(x=5, y=1, width=710, height=565)
 
         img_left = Image.open(r"C:\Users\Aastha Rathi\Downloads\next.jpg")
-        img_left = img_left.resize((740, 125), Image.LANCZOS)
+        img_left = img_left.resize((660, 100), Image.LANCZOS)
         self.photoimg_left = ImageTk.PhotoImage(img_left)
 
         f_lbl = Label(Left_frame, image=self.photoimg_left)
-        f_lbl.place(x=3, y=2, width=740, height=125)
+        f_lbl.place(x=3, y=2, width=660, height=100)
 
         # current course
 
@@ -106,7 +106,7 @@ class Student:
             text="current course information",
             font=("times new roman", 12, "bold"),
         )
-        current_course_frame.place(x=3, y=105, width=740, height=110)
+        current_course_frame.place(x=3, y=105, width=700, height=100)
 
         # Department
 
@@ -127,10 +127,10 @@ class Student:
         )
         dep_combo["values"] = (
             "Select Department",
-            "Computer",
+            "Computer Science",
             "IT",
-            "Civil",
-            "Mechanical",
+            "Maths",
+            "Physics",
         )
         dep_combo.current(0)
         dep_combo.grid(row=0, column=1, padx=2, pady=10, sticky=W)
@@ -152,7 +152,7 @@ class Student:
             width=17,
             state="readonly",
         )
-        course_combo["values"] = ("Select Course", "FE", "SE", "TE", "BE")
+        course_combo["values"] = ("Select Course", "MCA", "BTech", "Maths", "Physics")
         course_combo.current(0)
         course_combo.grid(row=0, column=3, padx=2, pady=10, sticky=W)
 
@@ -175,10 +175,10 @@ class Student:
         )
         year_combo["values"] = (
             "Select Year",
-            "2020-21",
-            "2021-22",
             "2022-23",
             "2023-24",
+            "2024-25",
+            "2025-26",
         )
         year_combo.current(0)
         year_combo.grid(row=1, column=1, padx=2, pady=10, sticky=W)
@@ -220,7 +220,7 @@ class Student:
             text="class student information",
             font=("times new roman", 12, "bold"),
         )
-        class_Student_frame.place(x=3, y=218, width=740, height=340)
+        class_Student_frame.place(x=3, y=210, width=700, height=285)
 
         # student ID
         StudentId_label = Label(
@@ -439,13 +439,13 @@ class Student:
         # button frame
 
         btn_frame = Frame(Left_frame, bd=2, relief=RIDGE, bg="white")
-        btn_frame.place(x=15, y=450, width=650, height=35)
+        btn_frame.place(x=10, y=465, width=640, height=32)
 
         save_btn = Button(
             btn_frame,
             text="Save",
             command=self.add_data,
-            width=17,
+            width=15,
             font=("times new roman", 12, "bold"),
             bg="blue",
             fg="white",
@@ -456,7 +456,7 @@ class Student:
             btn_frame,
             text="Update",
             command=self.update_data,
-            width=17,
+            width=15,
             font=("times new roman", 12, "bold"),
             bg="blue",
             fg="white",
@@ -467,7 +467,7 @@ class Student:
             btn_frame,
             text="Delete",
             command=self.delete_data,
-            width=17,
+            width=15,
             font=("times new roman", 12, "bold"),
             bg="blue",
             fg="white",
@@ -478,21 +478,25 @@ class Student:
             btn_frame,
             text="Reset",
             command=self.reset_data,
-            width=17,
+            width=15,
             font=("times new roman", 12, "bold"),
             bg="blue",
             fg="white",
         )
         reset_btn.grid(row=0, column=3)
+        
+        
 
         btn_frame1 = Frame(Left_frame, bd=2, relief=RIDGE, bg="white")
-        btn_frame1.place(x=15, y=495, width=650, height=35)
+        btn_frame1.place(x=10, y=505, width=640, height=32)
+        
+        import threading
 
         take_photo_btn = Button(
             btn_frame1,
             text="Take Photo Sample",
             command=self.generate_dataset,
-            width=35,
+            width=31,
             font=("times new roman", 12, "bold"),
             bg="blue",
             fg="white",
@@ -503,7 +507,7 @@ class Student:
             btn_frame1,
             text="Update Photo Sample",
             command=self.generate_dataset,
-            width=35,
+            width=31,
             font=("times new roman", 12, "bold"),
             bg="blue",
             fg="white",
@@ -520,14 +524,14 @@ class Student:
             text="Student Details",
             font=("times new roman", 12, "bold"),
         )
-        Right_frame.place(x=770, y=0, width=720, height=590)
+        Right_frame.place(x=685, y=1, width=665, height=545)
 
         img_right = Image.open(r"C:\Users\Aastha Rathi\Downloads\next.jpg")
-        img_right = img_right.resize((710, 115), Image.LANCZOS)
+        img_right = img_right.resize((650, 100), Image.LANCZOS)
         self.photoimg_right = ImageTk.PhotoImage(img_right)
 
         right_img_lbl = Label(Right_frame, image=self.photoimg_right, bd=0)
-        right_img_lbl.place(x=3, y=2, width=710, height=115)
+        right_img_lbl.place(x=3, y=2, width=650, height=100)
 
         search_frame = LabelFrame(
             Right_frame,
@@ -537,7 +541,7 @@ class Student:
             text="Search System",
             font=("times new roman", 12, "bold"),
         )
-        search_frame.place(x=5, y=132, width=710, height=70)
+        search_frame.place(x=5, y=110, width=650, height=60)
 
         search_label = Label(
             search_frame,
@@ -585,7 +589,7 @@ class Student:
 
         # table frame
         table_frame = Frame(Right_frame, bd=2, relief=RIDGE, bg="white")
-        table_frame.place(x=5, y=205, width=710, height=355)
+        table_frame.place(x=5, y=180, width=650, height=340)
 
         scroll_x = ttk.Scrollbar(table_frame, orient=HORIZONTAL)
         scroll_y = ttk.Scrollbar(table_frame, orient=VERTICAL)
@@ -653,7 +657,7 @@ class Student:
         self.student_table.column("teacher", width=100)
         self.student_table.column("photo", width=150)
 
-        self.student_table.pack(fill=BOTH, expand=1)
+        self.student_table.pack(fill=BOTH, expand=True)
         self.student_table.bind("<ButtonRelease>", self.get_cursor)
         self.fetch_data()
 
@@ -906,6 +910,8 @@ class Student:
     # =================generate dataset====================
 
     def generate_dataset(self):
+        
+        
         if (
             self.var_dep.get() == "Select Department"
             or self.var_std_name.get() == ""
@@ -980,18 +986,27 @@ class Student:
                     return img[y:y+h, x:x+w]
 
                 return None
+            
+           
 
-            cap = cv2.VideoCapture(0)
-            img_id = 0
 
-            import os
-            os.makedirs("data", exist_ok=True)
+            cap = cv2.VideoCapture(1)
 
+            
+            img_id =0
             while True:
+        
                 ret, my_frame = cap.read()
 
+                
+
                 if not ret:
+                    print("Frame not received, skipping...")
                     break
+                
+                    
+
+                cv2.imshow("Camera Test", my_frame)   # 👈 IMPORTANT (raw camera check)
 
                 face = face_cropped(my_frame)
 
@@ -1004,19 +1019,10 @@ class Student:
                     file_name_path = f"data/user.{self.var_std_id.get()}.{img_id}.jpg"
                     cv2.imwrite(file_name_path, face)
 
-                    cv2.putText(
-                    face,
-                    str(img_id),
-                    (50, 50),
-                    cv2.FONT_HERSHEY_COMPLEX,
-                    2,
-                    (255, 255, 255),
-                    2,
-                )
-
                     cv2.imshow("Cropped Face", face)
 
-                if cv2.waitKey(1) == 13 or img_id == 100:
+    # ESC press = exit
+                if cv2.waitKey(1) == 27 or img_id == 50:
                     break
 
             cap.release()

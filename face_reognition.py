@@ -3,12 +3,6 @@ from PIL import Image, ImageTk
 from tkinter import messagebox
 import cv2
 import mysql.connector
-from datetime import datetime
-import os
-import csv
-from datetime import datetime
-
-
 
 
 class Face_Recognition:
@@ -63,7 +57,6 @@ class Face_Recognition:
         detect_btn = Button(
             self.root,
             text="FACE DETECTOR",
-            command=self.face_recog,
             font=("times new roman", 25, "bold"),
             bg="dark blue",
             fg="white",
@@ -84,10 +77,8 @@ class Face_Recognition:
 
             for (x, y, w, h) in features:
                 id, predict = clf.predict(gray_image[y:y+h, x:x+w])
-            
+
                 confidence = int(100 * (1 - predict / 300))
-            
-             
                 print("Confidence:", confidence)
 
                 conn = mysql.connector.connect(
@@ -124,10 +115,6 @@ class Face_Recognition:
                 r = str(r[0]) if r else "Unknown"
 
                 if confidence > 75:
-                    
-                    self.mark_attendance(i, r, n)
-
-                    
                     cv2.rectangle(
                         img,
                         (x, y),
@@ -195,10 +182,7 @@ class Face_Recognition:
         clf = cv2.face.LBPHFaceRecognizer_create()
         clf.read("classifier.xml")
 
-        video_cap = cv2.VideoCapture(1)
-        
-        video_cap.set(3, 640)
-        video_cap.set(4, 480)
+        video_cap = cv2.VideoCapture(0)
 
         while True:
             ret, img = video_cap.read()
@@ -233,38 +217,6 @@ class Face_Recognition:
 
         video_cap.release()
         cv2.destroyAllWindows()
-        
-        
-    def mark_attendance(self, i, r, n):
-    
-
-        file_name = "attendance.csv"
-
-    # file create if not exists
-        if not os.path.exists(file_name):
-            with open(file_name, "w", newline="") as f:
-                writer = csv.writer(f)
-                writer.writerow(["ID", "Name", "Roll", "Time", "Date", "Status"])
-
-        with open(file_name, "r+", newline="") as f:
-            myDataList = f.readlines()
-            name_list = []
-
-            for line in myDataList:
-                entry = line.split(",")
-                name_list.append(entry[0])
-                
-            now = datetime.now()
-            time = now.strftime("%H:%M:%S")
-            date = now.strftime("%d/%m/%Y")
-
-            if str(i) not in name_list:
-                
-                writer = csv.writer(f)
-                writer.writerow([i, n, r, time, date, "Present"])
-        
-        
-    
         
     
 

@@ -81,13 +81,16 @@ class Train:
             messagebox.showerror("Error", "No images found in data folder")
             return
         data_dir=("data")
-        path=[os.path.join(data_dir,file) for file in os.listdir(data_dir)]
-        
+        path=[os.path.join(data_dir,file) for file in os.listdir(data_dir)
+        if file.endswith(".jpg")]
         faces=[]
         ids=[]
         
         for image in path:
-            img=Image.open(image).convert('L')  #gray scale image
+            print(image)
+            img=Image.open(image).convert('L')  
+            #gray scale image
+            img = img.resize((450, 450))
             imageNp = np.array(img , 'uint8')
             id = int(os.path.split(image)[1].split('.')[1])
             
